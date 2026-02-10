@@ -50,7 +50,7 @@
 
     &_wrapper {
       position: relative;
-      height: calc(100vh - 100px);
+      height: calc(var(--app-height) - var(--h-control));
       overflow: hidden;
 
       display: flex;
@@ -61,6 +61,11 @@
       flex: 1;
       width: 75.135%;
       padding-bottom: 785px;
+
+      @include maxW {
+        width: 100%;
+        padding-bottom: 685px;
+      }
     }
 
     &_footer {
@@ -69,7 +74,7 @@
       &_navigation {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 50px;
+        gap: 25px;
       }
 
       &_btn {
@@ -103,6 +108,42 @@
           margin-left: auto;
         }
       }
+
+      @include maxW {
+        padding-bottom: 25px;
+
+        &_navigation {
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        &_btn {
+          a {
+            margin-top: 15px;
+            gap: 15px;
+
+            span {
+              font-size: 1.1rem;
+            }
+          }
+
+          span {
+            font-size: 1.2rem;
+          }
+
+          p {
+            font-size: 1rem;
+          }
+        }
+
+        &_back {
+          margin-top: 90px;
+
+          svg {
+            width: 10px;
+            height: auto;
+          }
+        }
+      }
     }
 
     &_control {
@@ -120,11 +161,13 @@
         gap: 15px;
 
         opacity: 0;
+        pointer-events: none;
 
         button {
           &:nth-of-type(2) {
             font-size: 2.1rem;
             line-height: 1;
+            transform: translateY(1px);
           }
 
           &.--active {
@@ -172,6 +215,22 @@
           }
         }
       }
+
+      @include maxW {
+        &_size {
+          button {
+            &:nth-of-type(2) {
+              font-size: 1.8rem;
+            }
+          }
+        }
+
+        &_line {
+          bottom: 25px;
+          right: 0;
+          height: 60px;
+        }
+      }
     }
 
     &_heading {
@@ -179,6 +238,14 @@
 
       h2 {
         margin-bottom: 30px;
+      }
+
+      @include maxW {
+        margin-top: max(61.818vh, 442px);
+
+        h2 {
+          margin-bottom: 10px;
+        }
       }
     }
 
@@ -197,6 +264,26 @@
 
           &:first-child {
             margin-top: 60px;
+          }
+        }
+      }
+
+      @include maxW {
+        margin-top: 690px;
+
+        &_article {
+          margin-top: 100px;
+
+          &:first-child {
+            margin-top: 220px;
+          }
+
+          p {
+            margin-top: 35px;
+
+            &:first-child {
+              margin-top: 50px;
+            }
           }
         }
       }
@@ -227,6 +314,24 @@
           &:before {
             font-size: inherit;
             content: "※" counter(item);
+          }
+        }
+      }
+
+      @include maxW {
+        margin-top: 230px;
+
+        ul {
+          margin-top: 35px;
+          gap: 2px;
+
+          li {
+            gap: 10px;
+
+            a,
+            p {
+              display: inline;
+            }
           }
         }
       }
@@ -267,14 +372,41 @@
 
         span {
           margin-top: 15px;
+          display: block;
           font-size: 1rem;
           line-height: 1.5;
+        }
+      }
+
+      @include maxW {
+        margin-top: 60px;
+        padding: 35px 0;
+        grid-template-columns: 1fr;
+        gap: 30px;
+
+        &_poster {
+          width: 36.232vw;
+          margin: 0 auto;
+        }
+
+        &_content {
+          ul {
+            margin-top: 12px;
+          }
+
+          span {
+            margin-top: 8px;
+          }
         }
       }
     }
 
     &_author {
       margin-top: 80px;
+
+      @include maxW {
+        margin-top: 70px;
+      }
     }
   }
 }

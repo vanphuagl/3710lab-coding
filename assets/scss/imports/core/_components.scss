@@ -33,6 +33,31 @@
   }
 }
 
+.c-heading {
+  position: fixed;
+  top: 150px;
+  right: var(--pr);
+  z-index: 11;
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 4px;
+    writing-mode: vertical-lr;
+  }
+
+  @include maxW {
+    position: absolute;
+    top: 130px;
+    right: 90px;
+
+    h1 {
+      font-size: 2rem;
+      letter-spacing: 3px;
+    }
+  }
+}
+
 [data-menu] {
   position: fixed;
   top: 0;
@@ -44,7 +69,9 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: 0.5s ease-in;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-out;
 
   &.--show {
     opacity: 1;
@@ -178,7 +205,7 @@
 .c-control {
   position: relative;
   width: 100%;
-  height: 100px;
+  height: var(--h-control);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -186,13 +213,17 @@
 
   &_left {
     display: flex;
-    gap: 50px;
+    gap: 45px;
 
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     z-index: 11;
+
+    [data-menu-toggler] {
+      width: 40px;
+    }
   }
 
   &_right {
@@ -213,9 +244,5 @@
         text-decoration: underline;
       }
     }
-  }
-
-  @include maxW {
-    height: 65px;
   }
 }
