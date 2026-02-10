@@ -4,8 +4,6 @@
 
 .detailpage {
   .bg {
-    display: none;
-
     &_container {
       position: fixed;
       top: 0;
@@ -27,6 +25,9 @@
       transform: translate(-50%, -50%);
       object-fit: cover;
       display: block;
+
+    //   opacity: 0.15;
+      opacity: 1;
     }
 
     &_overlay {
@@ -36,8 +37,10 @@
       width: 100%;
       height: 100%;
       background: var(--black-cl);
+    //   background: var(--white-cl);
       opacity: 0.35;
       z-index: 2;
+      pointer-events: none;
     }
   }
 
@@ -138,6 +141,7 @@
         top: 50%;
         right: 0;
         transform: translateY(-50%);
+        z-index: 3;
 
         display: flex;
         align-items: flex-end;
@@ -163,11 +167,12 @@
         position: absolute;
         right: 12px;
         bottom: 45px;
+        z-index: 3;
 
         display: block;
         height: 80px;
         width: 1px;
-        background-color: hsla(0, 0%, 100%, 0.4);
+        background: hsla(0, 0%, 100%, 0.4);
         text-align: center;
         overflow: hidden;
 
@@ -179,7 +184,8 @@
           width: 100%;
           height: 0%;
           animation: 3s infinite scroll-down-vertical;
-          background-color: var(--white-cl);
+          background: var(--white-cl);
+          z-index: 1;
         }
 
         @keyframes scroll-down-vertical {
@@ -203,6 +209,7 @@
         position: absolute;
         bottom: 45px;
         right: 5px;
+        z-index: 3;
       }
 
       @include maxW {

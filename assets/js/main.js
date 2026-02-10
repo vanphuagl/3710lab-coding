@@ -225,8 +225,9 @@ const toggleMenu = () => {
 menuTogglers?.forEach((btn) => btn.addEventListener("click", toggleMenu));
 
 // ===== handle video =====
-const [video, soundOnBtn, soundOffBtn] = [
+const [video, videoOverlay, soundOnBtn, soundOffBtn] = [
   document.querySelector("[data-video]"),
+  document.querySelector("[data-video-overlay]"),
   document.querySelector("[data-sound-on]"),
   document.querySelector("[data-sound-off]"),
 ];
@@ -267,6 +268,28 @@ const handleBacktoTop = function () {
   });
 };
 backtotop?.addEventListener("click", handleBacktoTop);
+
+// ===== scroll trigger =====
+gsap.registerPlugin(ScrollTrigger);
+
+const scrollTriggerTop = () => {
+  const trigger = document.querySelector("[data-offsettop]");
+  if (!video || !videoOverlay || !trigger) return;
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: trigger,
+        scroller: wrapper,
+        start: "top bottom",
+        end: "top bottom",
+        toggleActions: "play none none reverse",
+        markers: true,
+      },
+    })
+    .to(video, { opacity: 0.15, duration: 1 }, 0)
+    .to(videoOverlay, { backgroundColor: "#fff", duration: 1 }, 0);
+};
+scrollTriggerTop();
 
 // ### ===== DOMCONTENTLOADED ===== ###
 window.addEventListener("DOMContentLoaded", init);
