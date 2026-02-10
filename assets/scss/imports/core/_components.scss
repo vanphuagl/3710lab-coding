@@ -1,0 +1,175 @@
+/* Components
+------------------------------------------------------------*/
+
+.c-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--app-height);
+  z-index: 1000;
+  background: var(--main-bg-cl);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &_content {
+    opacity: 0;
+
+    p {
+      font-size: 1.4rem;
+      line-height: 2;
+      text-align: center;
+    }
+  }
+
+  @include maxW {
+    &_content {
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+.c-menu {
+  &_container {
+    position: relative;
+    width: 100%;
+    height: var(--app-height);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  &_main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 70px 0;
+
+    button {
+      width: fit-content;
+      user-select: none;
+    }
+
+    @include maxW {
+      padding: 0 0 45px 0;
+    }
+  }
+
+  &_list {
+    margin-top: 28px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    counter-reset: item;
+
+    li {
+      width: fit-content;
+      user-select: none;
+      counter-increment: item;
+      position: relative;
+
+      &:before {
+        content: counter(item, decimal-leading-zero);
+        position: absolute;
+        top: 0;
+        left: -48px;
+        font-size: 1.3rem;
+        line-height: 2.6;
+      }
+
+      a {
+        span {
+          font-size: 1.2rem;
+          transform: translateX(-5px);
+          display: block;
+        }
+      }
+    }
+
+    @include maxW {
+      margin-top: 15px;
+      gap: 8px;
+
+      li {
+        padding-left: 25px;
+
+        &:before {
+          left: 0;
+          font-size: 1rem;
+          line-height: 27px;
+        }
+
+        a {
+          span {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+  }
+
+  &_control {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+
+    & > div {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @include maxW {
+      height: 65px;
+    }
+  }
+
+  &_introduce {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 360px;
+    background: var(--main-bg-cl);
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+
+    will-change: transform;
+    transform: translateY(100%);
+
+    .desc {
+      padding-top: 10px;
+      flex: 1;
+    }
+
+    .logo {
+      position: absolute;
+      right: 0;
+      bottom: 47px;
+      z-index: 1;
+    }
+
+    @include maxW {
+      height: 265px;
+
+      .logo {
+        bottom: 28px;
+
+        svg {
+          width: 100px;
+          height: auto;
+        }
+      }
+    }
+  }
+}
