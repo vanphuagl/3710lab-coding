@@ -4,6 +4,8 @@
 
 .detailpage {
   .bg {
+    display: none;
+
     &_container {
       position: fixed;
       top: 0;
@@ -67,7 +69,7 @@
     }
 
     &_footer {
-      padding-bottom: 45px;
+      padding-bottom: 230px;
 
       &_navigation {
         display: grid;
@@ -99,14 +101,6 @@
         }
       }
 
-      &_back {
-        margin-top: 150px;
-
-        svg {
-          margin-left: auto;
-        }
-      }
-
       @include maxW {
         padding-bottom: 25px;
 
@@ -130,15 +124,6 @@
 
           p {
             font-size: 1rem;
-          }
-        }
-
-        &_back {
-          margin-top: 90px;
-
-          svg {
-            width: 10px;
-            height: auto;
           }
         }
       }
@@ -177,7 +162,7 @@
       &_line {
         position: absolute;
         right: 12px;
-        bottom: 48px;
+        bottom: 45px;
 
         display: block;
         height: 80px;
@@ -214,6 +199,12 @@
         }
       }
 
+      &_back {
+        position: absolute;
+        bottom: 45px;
+        right: 5px;
+      }
+
       @include maxW {
         &_size {
           button {
@@ -227,6 +218,15 @@
           bottom: 25px;
           right: 0;
           height: 60px;
+        }
+
+        &_back {
+          bottom: 25px;
+
+          svg {
+            width: 10px;
+            height: auto;
+          }
         }
       }
     }
