@@ -218,7 +218,9 @@ const [menu, menuTogglers] = [
 ];
 
 const toggleMenu = () => {
-  menu.classList.toggle("--show", !menu.classList.contains("--show"));
+  const isOpen = menu.classList.contains("--show");
+  menu.classList.toggle("--show", !isOpen);
+  menuTogglers[0].innerText = isOpen ? "Menu" : "Close";
 };
 menuTogglers.forEach((btn) => btn.addEventListener("click", toggleMenu));
 
