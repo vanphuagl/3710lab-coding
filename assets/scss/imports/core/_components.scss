@@ -33,6 +33,26 @@
   }
 }
 
+[data-menu] {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  background: var(--main-bg-cl);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 0.5s ease-in;
+
+  &.--show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
 .c-menu {
   &_container {
     position: relative;
@@ -112,64 +132,89 @@
       }
     }
   }
+}
 
-  &_control {
-    position: relative;
-    width: 100%;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: transparent;
+.c-introduce {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 360px;
+  background: var(--main-bg-cl);
+  z-index: 20;
 
-    & > div {
-      display: flex;
-      justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+
+  will-change: transform;
+  transform: translateY(100%);
+
+  .desc {
+    padding-top: 10px;
+    flex: 1;
+  }
+
+  .logo {
+    position: absolute;
+    right: 0;
+    bottom: 47px;
+    z-index: 1;
+  }
+
+  @include maxW {
+    height: 265px;
+
+    .logo {
+      bottom: 28px;
+
+      svg {
+        width: 100px;
+        height: auto;
+      }
     }
+  }
+}
 
-    @include maxW {
-      height: 65px;
+.c-control {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+
+  &_left {
+    display: flex;
+    gap: 50px;
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 11;
+  }
+
+  &_right {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 9;
+  }
+
+  &_sound {
+    display: flex;
+    gap: 15px;
+
+    button {
+      &.--active {
+        text-decoration: underline;
+      }
     }
   }
 
-  &_introduce {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 360px;
-    background: var(--main-bg-cl);
-    z-index: 3;
-
-    display: flex;
-    flex-direction: column;
-
-    will-change: transform;
-    transform: translateY(100%);
-
-    .desc {
-      padding-top: 10px;
-      flex: 1;
-    }
-
-    .logo {
-      position: absolute;
-      right: 0;
-      bottom: 47px;
-      z-index: 1;
-    }
-
-    @include maxW {
-      height: 265px;
-
-      .logo {
-        bottom: 28px;
-
-        svg {
-          width: 100px;
-          height: auto;
-        }
-      }
-    }
+  @include maxW {
+    height: 65px;
   }
 }

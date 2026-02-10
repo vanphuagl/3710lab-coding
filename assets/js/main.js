@@ -16,7 +16,11 @@ const init = () => {
 };
 
 // ===== lenis =====
+const wrapper = document.querySelector("[data-lenis-wrapper]");
 const lenis = new Lenis({
+  ...(wrapper && {
+    wrapper: wrapper,
+  }),
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smooth: true,
@@ -32,6 +36,11 @@ const raf = (t) => {
   requestAnimationFrame(raf);
 };
 requestAnimationFrame(raf);
+lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
 
 // ===== app height =====
 const appHeight = () => {
@@ -201,6 +210,30 @@ const initPopup = () => {
     });
   });
 };
+
+// ===== menu =====
+const [menu, menuTogglers] = [
+  document.querySelector("[data-menu]"),
+  document.querySelectorAll("[data-menu-toggler]"),
+];
+
+const toggleMenu = () => {
+  menu.classList.toggle("--show", !menu.classList.contains("--show"));
+};
+menuTogglers.forEach((btn) => btn.addEventListener("click", toggleMenu));
+
+// ===== handle video =====
+const video = document.querySelector("[data-video]");
+const soundOnBtn = document.querySelector("[data-sound-on]");
+const soundOffBtn = document.querySelector("[data-sound-off]");
+
+const toggleSound = (isMuted) => {
+  video.muted = isMuted;
+  soundOnBtn.classList.toggle("--active", !isMuted);
+  soundOffBtn.classList.toggle("--active", isMuted);
+};
+soundOnBtn?.addEventListener("click", () => toggleSound(false));
+soundOffBtn?.addEventListener("click", () => toggleSound(true));
 
 // ### ===== DOMCONTENTLOADED ===== ###
 window.addEventListener("DOMContentLoaded", init);
