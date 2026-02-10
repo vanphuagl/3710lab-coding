@@ -222,12 +222,14 @@ const toggleMenu = () => {
   menu.classList.toggle("--show", !isOpen);
   menuTogglers[0].innerText = isOpen ? "Menu" : "Close";
 };
-menuTogglers.forEach((btn) => btn.addEventListener("click", toggleMenu));
+menuTogglers?.forEach((btn) => btn.addEventListener("click", toggleMenu));
 
 // ===== handle video =====
-const video = document.querySelector("[data-video]");
-const soundOnBtn = document.querySelector("[data-sound-on]");
-const soundOffBtn = document.querySelector("[data-sound-off]");
+const [video, soundOnBtn, soundOffBtn] = [
+  document.querySelector("[data-video]"),
+  document.querySelector("[data-sound-on]"),
+  document.querySelector("[data-sound-off]"),
+];
 
 const toggleSound = (isMuted) => {
   video.muted = isMuted;
@@ -236,6 +238,17 @@ const toggleSound = (isMuted) => {
 };
 soundOnBtn?.addEventListener("click", () => toggleSound(false));
 soundOffBtn?.addEventListener("click", () => toggleSound(true));
+
+// ===== back to top =====
+const backtotop = document.querySelector("[data-backtotop]");
+const handleBacktoTop = function () {
+  lenis.scrollTo(0, {
+    duration: 1.5,
+    easing: (t) => t * t * t * (t * (t * 6 - 15) + 10),
+    force: true,
+  });
+};
+backtotop?.addEventListener("click", handleBacktoTop);
 
 // ### ===== DOMCONTENTLOADED ===== ###
 window.addEventListener("DOMContentLoaded", init);

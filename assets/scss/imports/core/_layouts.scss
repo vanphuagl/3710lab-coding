@@ -67,7 +67,8 @@ main {
 h1,
 h2,
 h3,
-p {
+p,
+span {
   font-feature-settings: "palt" 1;
   text-align: justify;
 }
