@@ -232,12 +232,30 @@ const [video, soundOnBtn, soundOffBtn] = [
 ];
 
 const toggleSound = (isMuted) => {
-  video.muted = isMuted;
-  soundOnBtn.classList.toggle("--active", !isMuted);
-  soundOffBtn.classList.toggle("--active", isMuted);
+  video.muted = !isMuted;
+  soundOnBtn.classList.toggle("--active", isMuted);
+  soundOffBtn.classList.toggle("--active", !isMuted);
 };
-soundOnBtn?.addEventListener("click", () => toggleSound(false));
-soundOffBtn?.addEventListener("click", () => toggleSound(true));
+soundOnBtn?.addEventListener("click", () => toggleSound(true));
+soundOffBtn?.addEventListener("click", () => toggleSound(false));
+
+// ===== handle size text =====
+const [sizeDefaultBtn, sizeLargebtn] = [
+  document.querySelector("[data-size-default]"),
+  document.querySelector("[data-size-large]"),
+];
+
+const toggleSize = (isLarge) => {
+  document.documentElement.style.setProperty("--font-scale", isLarge ? 1.3 : 1);
+  sizeLargebtn.classList.toggle("--active", isLarge);
+  sizeDefaultBtn.classList.toggle("--active", !isLarge);
+
+  requestAnimationFrame(() => {
+    lenis?.resize();
+  });
+};
+sizeLargebtn?.addEventListener("click", () => toggleSize(true));
+sizeDefaultBtn?.addEventListener("click", () => toggleSize(false));
 
 // ===== back to top =====
 const backtotop = document.querySelector("[data-backtotop]");
