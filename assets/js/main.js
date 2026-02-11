@@ -359,10 +359,21 @@ const handleScrollTrigger = () => {
     .to(videos, { opacity: 0.15, duration: 0.5 }, 0)
     .to(videoOverlay, { backgroundColor: "#fff", duration: 0.5 }, 0)
     .to(":root", { "--text-color": "#000", duration: 0.5 }, 0)
-    .to("[data-control-line]", { opacity: 0, duration: 0.5 }, 0)
+    .to(
+      "[data-control-line]",
+      { opacity: 0, filter: "blur(10px)", duration: 0.3, ease: "power2.in" },
+      0,
+    )
     .to(
       "[data-control-size]",
-      { opacity: 1, pointerEvents: "auto", duration: 0.5 },
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        pointerEvents: "auto",
+        duration: 0.6,
+        ease: "power2.out",
+        delay: 0.3,
+      },
       0,
     );
 
@@ -382,10 +393,27 @@ const handleScrollTrigger = () => {
     .to(":root", { "--text-color": "#fff", duration: 0.5 }, 0)
     .to(
       "[data-control-size]",
-      { opacity: 0, pointerEvents: "none", duration: 0.5 },
+      {
+        opacity: 0,
+        filter: "blur(10px)",
+        pointerEvents: "none",
+        duration: 0.3,
+        ease: "power2.in",
+      },
       0,
     )
-    .to(backtotop, { opacity: 1, pointerEvents: "auto", duration: 0.5 }, 0);
+    .to(
+      backtotop,
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        pointerEvents: "auto",
+        duration: 0.6,
+        ease: "power2.out",
+        delay: 0.3,
+      },
+      0,
+    );
 };
 
 // ### ===== DOMCONTENTLOADED ===== ###
