@@ -2,9 +2,14 @@
 
 // ===== globals =====
 const isMobile = window.matchMedia("(max-width: 1024px)");
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({
+  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize"
+});
 
 // ===== init =====
 const init = () => {
+  ScrollTrigger.refresh();
   history.scrollRestoration = "manual";
   document.body.classList.remove("fadeout");
   // # app height
@@ -15,6 +20,8 @@ const init = () => {
   initLoading();
   // # init popup
   initPopup();
+  // # scroll trigger
+  handleScrollTrigger();
 };
 
 // ===== lenis =====
@@ -295,6 +302,7 @@ const toggleSize = (isLarge) => {
 
   requestAnimationFrame(() => {
     lenis?.resize();
+    ScrollTrigger.refresh();
   });
 };
 sizeLargebtn?.addEventListener("click", () => toggleSize(true));
@@ -312,8 +320,6 @@ const handleBacktoTop = function () {
 backtotop?.addEventListener("click", handleBacktoTop);
 
 // ===== scroll trigger =====
-gsap.registerPlugin(ScrollTrigger);
-
 const handleScrollTrigger = () => {
   const triggerTop = document.querySelector("[data-offsettop]");
   const triggerBottom = document.querySelector("[data-offsetbottom]");
@@ -361,7 +367,6 @@ const handleScrollTrigger = () => {
     )
     .to(backtotop, { opacity: 1, pointerEvents: "auto", duration: 0.5 }, 0);
 };
-handleScrollTrigger();
 
 // ### ===== DOMCONTENTLOADED ===== ###
 window.addEventListener("pageshow", init);
