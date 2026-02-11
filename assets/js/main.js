@@ -290,6 +290,7 @@ const initPopup = () => {
 const initDetailPage = () => {
   const detailSection = document.querySelector("[data-section-detail]");
   if (!detailSection) return;
+  lenis.stop();
   document.body.style.overflow = "hidden";
 
   gsap.to(detailSection, {
@@ -298,6 +299,7 @@ const initDetailPage = () => {
     delay: 2,
     ease: "power2.out",
     onComplete: () => {
+      lenis.start();
       document.body.style.overflow = "";
     },
   });
