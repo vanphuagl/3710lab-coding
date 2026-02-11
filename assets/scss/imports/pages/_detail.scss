@@ -20,8 +20,8 @@
       left: 50%;
       min-width: 100%;
       min-height: 100%;
-      width: auto;
-      height: auto;
+      width: 100%;
+      height: 100%;
       transform: translate(-50%, -50%);
       object-fit: cover;
       display: block;
@@ -76,6 +76,20 @@
 
       .text-base {
         font-size: calc(1.7rem * var(--font-scale, 1));
+      }
+
+      @include maxW {
+        .text-sm {
+          font-size: calc(1.2rem * var(--font-scale, 1));
+        }
+
+        .text-l {
+          font-size: calc(1.6rem * var(--font-scale, 1));
+        }
+
+        .text-base {
+          font-size: calc(1.4rem * var(--font-scale, 1));
+        }
       }
     }
 
@@ -331,7 +345,9 @@
           user-select: none;
           counter-increment: item;
           position: relative;
-          display: flex;
+
+          display: grid;
+          grid-template-columns: max-content 1fr;
           gap: 20px;
 
           a {

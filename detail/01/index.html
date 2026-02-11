@@ -4,7 +4,7 @@
 <head>
     <!-- @meta -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="title" content="3710lab">
     <meta name="description" content="3710lab">
@@ -215,10 +215,11 @@
         <!-- bg// -->
         <section class="bg" data-bg>
             <div class="bg_container">
-                <video class="bg_video" pc-only data-video autoplay muted loop playsinline>
+                <video class="bg_video" poster="/assets/images/video-poster.jpg" preload="auto" pc-only data-video
+                    autoplay muted loop playsinline>
                     <source src="/assets/videos/yuriage01_yoko_pc.webm" type="video/webm">
                 </video>
-                <video class="bg_video" sp-only data-video autoplay muted loop playsinline>
+                <video class="bg_video" poster="/assets/images/video-poster-sp.jpg" preload="auto" sp-only data-video autoplay muted loop playsinline>
                     <source src="/assets/videos/yurage02_tate_sp.webm" type="video/webm">
                 </video>
             </div>

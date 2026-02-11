@@ -4,14 +4,17 @@
 const isMobile = window.matchMedia("(max-width: 1024px)");
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({
-  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize"
+  autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize",
 });
 
 // ===== init =====
 const init = () => {
   ScrollTrigger.refresh();
   history.scrollRestoration = "manual";
-  document.body.classList.remove("fadeout");
+  // # wait for videos
+  waitForVideos().then(() => {
+    document.body.classList.remove("fadeout");
+  });
   // # app height
   appHeight();
   // # init detail pag
@@ -22,6 +25,23 @@ const init = () => {
   initPopup();
   // # scroll trigger
   handleScrollTrigger();
+};
+
+// ===== wait for videos =====
+const waitForVideos = () => {
+  const videos = document.querySelectorAll("[data-video]");
+  if (!videos.length) return Promise.resolve();
+
+  const videoPromises = Array.from(videos).map((video) => {
+    if (video.readyState >= 3) return Promise.resolve();
+
+    return new Promise((resolve) => {
+      video.addEventListener("canplaythrough", resolve, { once: true });
+      setTimeout(resolve, 3000);
+    });
+  });
+
+  return Promise.all(videoPromises);
 };
 
 // ===== lenis =====
@@ -330,8 +350,8 @@ const handleScrollTrigger = () => {
       scrollTrigger: {
         trigger: triggerTop,
         scroller: wrapper,
-        start: "bottom top+=10%",
-        end: "bottom top+=10%",
+        start: "bottom top+=15%",
+        end: "bottom top+=15%",
         toggleActions: "play none none reverse",
         markers: false,
       },
@@ -351,8 +371,8 @@ const handleScrollTrigger = () => {
       scrollTrigger: {
         trigger: triggerBottom,
         scroller: wrapper,
-        start: "bottom top+=10%",
-        end: "bottom top+=10%",
+        start: "bottom top+=15%",
+        end: "bottom top+=15%",
         toggleActions: "play none none reverse",
         markers: false,
       },
@@ -369,4 +389,9 @@ const handleScrollTrigger = () => {
 };
 
 // ### ===== DOMCONTENTLOADED ===== ###
-window.addEventListener("pageshow", init);
+window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    document.body.classList.remove("fadeout");
+  }
+});
