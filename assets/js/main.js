@@ -12,6 +12,7 @@ const init = () => {
   ScrollTrigger.refresh();
   history.scrollRestoration = "manual";
   // # wait for videos
+  handleBackgroundVideo();
   waitForVideos().then(() => {
     document.body.classList.remove("fadeout");
   });
@@ -25,6 +26,29 @@ const init = () => {
   initPopup();
   // # scroll trigger
   handleScrollTrigger();
+};
+
+// ===== handle background video responsive =====
+const handleBackgroundVideo = () => {
+  const [video, source] = [
+    document.getElementById("bg-video"),
+    document.getElementById("video-source"),
+  ];
+
+  if (!video || !source) return;
+
+  const updateVideo = () => {
+    if (isMobile.matches) {
+      video.poster = "/assets/images/video-poster-sp.webp";
+      source.src = "/assets/videos/yurage02_tate_sp.webm";
+    } else {
+      video.poster = "/assets/images/video-poster.webp";
+      source.src = "/assets/videos/yuriage01_yoko_pc.webm";
+    }
+    video.load();
+  };
+  updateVideo();
+  isMobile.addEventListener("change", updateVideo);
 };
 
 // ===== wait for videos =====
