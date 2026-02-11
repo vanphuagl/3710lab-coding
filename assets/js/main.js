@@ -2,13 +2,15 @@
 
 // ===== globals =====
 const isMobile = window.matchMedia("(max-width: 1024px)");
-const eventsTrigger = ["pageshow", "scroll"];
 
 // ===== init =====
 const init = () => {
   history.scrollRestoration = "manual";
+  document.body.classList.remove("fadeout");
   // # app height
   appHeight();
+  // # init detail pag
+  initDetailPage();
   // # init loading
   initLoading();
   // # init popup
@@ -53,20 +55,42 @@ const appHeight = () => {
 window.addEventListener("resize", appHeight);
 
 // ===== href fadeout =====
-const handleLinkClick = (e) => {
-  const link = e.target.closest(
+document.addEventListener("click", (evt) => {
+  const link = evt.target.closest(
     'a:not([href^="#"]):not([target]):not([href^="mailto"]):not([href^="tel"])',
   );
-
   if (!link) return;
-  e.preventDefault();
 
-  document.body.classList.add("fadeout");
-  setTimeout(() => {
-    window.location.href = link.href;
-  }, 1100);
-};
-document.addEventListener("click", handleLinkClick);
+  evt.preventDefault();
+  const url = link.getAttribute("href");
+
+  if (url && url !== "") {
+    const idx = url.indexOf("#");
+    const hash = idx !== -1 ? url.substring(idx) : "";
+
+    if (hash && hash !== "#") {
+      try {
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+          return false;
+        }
+      } catch (err) {
+        console.error("Invalid hash selector:", hash, err);
+      }
+    }
+
+    document.body.classList.add("fadeout");
+    setTimeout(function () {
+      window.location = url;
+    }, 1500);
+  }
+
+  return false;
+});
 
 // ===== lazy load =====
 const ll = new LazyLoad({
@@ -211,6 +235,12 @@ const initPopup = () => {
   });
 };
 
+// ==== go to page ====
+const initDetailPage = () => {
+  const detailSection = document.querySelector("[data-section-detail]");
+  if (!detailSection) return;
+};
+
 // ===== menu =====
 const [menu, menuTogglers, menuColors] = [
   document.querySelector("[data-menu]"),
@@ -224,11 +254,9 @@ const toggleMenu = () => {
   menuTogglers[0].innerText = isOpen ? "Menu" : "Close";
 
   if (isOpen) {
-    lenis.start();
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   } else {
-    lenis.stop();
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   }
 
   if (!menuColors) return;
@@ -247,7 +275,7 @@ const [videos, videoOverlay, soundOnBtn, soundOffBtn] = [
 const toggleSound = (isMuted) => {
   videos.forEach((item) => {
     item.muted = !isMuted;
-  })
+  });
   soundOnBtn.classList.toggle("--active", isMuted);
   soundOffBtn.classList.toggle("--active", !isMuted);
 };
@@ -336,4 +364,4 @@ const handleScrollTrigger = () => {
 handleScrollTrigger();
 
 // ### ===== DOMCONTENTLOADED ===== ###
-window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("pageshow", init);

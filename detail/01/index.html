@@ -30,15 +30,8 @@
                 kitId: 'vcm6dkc',
                 scriptTimeout: 3000,
                 async: true,
-                active: function () {
-                    d.body.classList.remove('fadeout');
-                },
             },
                 h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
-
-            setTimeout(function () {
-                d.body.classList.remove('fadeout');
-            }, 3000);
         })(document);
     </script>
 
@@ -220,13 +213,13 @@
     <!-- @main -->
     <main class="detailpage">
         <!-- bg// -->
-        <section class="bg">
+        <section class="bg" data-bg>
             <div class="bg_container">
                 <video class="bg_video" pc-only data-video autoplay muted loop playsinline>
-                    <source src="/assets/videos/yuriage01_yoko_pc.webm" type="video/webm" >
+                    <source src="/assets/videos/yuriage01_yoko_pc.webm" type="video/webm">
                 </video>
                 <video class="bg_video" sp-only data-video autoplay muted loop playsinline>
-                    <source src="/assets/videos/yurage02_tate_sp.webm" type="video/webm" >
+                    <source src="/assets/videos/yurage02_tate_sp.webm" type="video/webm">
                 </video>
             </div>
             <div class="bg_overlay" data-video-overlay></div>
@@ -234,7 +227,7 @@
         <!-- //bg -->
 
         <!-- detail// -->
-        <section class="detail">
+        <section class="detail" data-section-detail>
             <div class="detail_container" data-color>
                 <div class="detail_wrapper u-container" data-lenis-wrapper>
                     <div class="c-heading" data-menu-color>
