@@ -212,15 +212,19 @@ const initPopup = () => {
 };
 
 // ===== menu =====
-const [menu, menuTogglers] = [
+const [menu, menuTogglers, menuColors] = [
   document.querySelector("[data-menu]"),
   document.querySelectorAll("[data-menu-toggler]"),
+  document.querySelectorAll("[data-menu-color]"),
 ];
 
 const toggleMenu = () => {
   const isOpen = menu.classList.contains("--show");
   menu.classList.toggle("--show", !isOpen);
   menuTogglers[0].innerText = isOpen ? "Menu" : "Close";
+
+  if (!menuColors) return;
+  menuColors.forEach((item) => item.classList.toggle("--color", !isOpen));
 };
 menuTogglers?.forEach((btn) => btn.addEventListener("click", toggleMenu));
 
@@ -259,7 +263,7 @@ sizeLargebtn?.addEventListener("click", () => toggleSize(true));
 sizeDefaultBtn?.addEventListener("click", () => toggleSize(false));
 
 // ===== back to top =====
-const backtotop = document.querySelector("[data-backtotop]");
+const backtotop = document.querySelector("[data-control-back]");
 const handleBacktoTop = function () {
   lenis.scrollTo(0, {
     duration: 1.5,
@@ -272,24 +276,54 @@ backtotop?.addEventListener("click", handleBacktoTop);
 // ===== scroll trigger =====
 gsap.registerPlugin(ScrollTrigger);
 
-const scrollTriggerTop = () => {
-  const trigger = document.querySelector("[data-offsettop]");
-  if (!video || !videoOverlay || !trigger) return;
+const handleScrollTrigger = () => {
+  const triggerTop = document.querySelector("[data-offsettop]");
+  const triggerBottom = document.querySelector("[data-offsetbottom]");
+
+  if (!video || !videoOverlay || !triggerTop || !triggerBottom) return;
   gsap
     .timeline({
       scrollTrigger: {
-        trigger: trigger,
+        trigger: triggerTop,
         scroller: wrapper,
-        start: "top bottom",
-        end: "top bottom",
+        start: "bottom top+=10%",
+        end: "bottom top+=10%",
         toggleActions: "play none none reverse",
         markers: true,
       },
     })
-    .to(video, { opacity: 0.15, duration: 1 }, 0)
-    .to(videoOverlay, { backgroundColor: "#fff", duration: 1 }, 0);
+    .to(video, { opacity: 0.15, duration: 0.5 }, 0)
+    .to(videoOverlay, { backgroundColor: "#fff", duration: 0.5 }, 0)
+    .to(":root", { "--text-color": "#000", duration: 0.5 }, 0)
+    .to("[data-control-line]", { opacity: 0, duration: 0.5 }, 0)
+    .to(
+      "[data-control-size]",
+      { opacity: 1, pointerEvents: "auto", duration: 0.5 },
+      0,
+    );
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: triggerBottom,
+        scroller: wrapper,
+        start: "bottom top+=10%",
+        end: "bottom top+=10%",
+        toggleActions: "play none none reverse",
+        markers: true,
+      },
+    })
+    .to(video, { opacity: 1, duration: 0.5 }, 0)
+    .to(videoOverlay, { backgroundColor: "#000", duration: 0.5 }, 0)
+    .to(":root", { "--text-color": "#fff", duration: 0.5 }, 0)
+    .to(
+      "[data-control-size]",
+      { opacity: 0, pointerEvents: "none", duration: 0.5 },
+      0,
+    )
+    .to(backtotop, { opacity: 1, pointerEvents: "auto", duration: 0.5 }, 0);
 };
-scrollTriggerTop();
+handleScrollTrigger();
 
 // ### ===== DOMCONTENTLOADED ===== ###
 window.addEventListener("DOMContentLoaded", init);

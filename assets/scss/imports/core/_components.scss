@@ -80,6 +80,12 @@
   }
 }
 
+[data-menu-color] {
+  &.--color {
+    color: var(--black-cl) !important;
+  }
+}
+
 .c-menu {
   &_container {
     position: relative;
@@ -179,6 +185,7 @@
   .desc {
     padding-top: 10px;
     flex: 1;
+    overflow-y: auto;
   }
 
   .logo {
@@ -222,7 +229,11 @@
     z-index: 11;
 
     [data-menu-toggler] {
-      width: 40px;
+      min-width: 45px;
+    }
+
+    @include maxW {
+      gap: 25px;
     }
   }
 

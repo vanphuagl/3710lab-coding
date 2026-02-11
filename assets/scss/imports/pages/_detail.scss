@@ -25,9 +25,6 @@
       transform: translate(-50%, -50%);
       object-fit: cover;
       display: block;
-
-    //   opacity: 0.15;
-      opacity: 1;
     }
 
     &_overlay {
@@ -36,8 +33,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--black-cl);
-    //   background: var(--white-cl);
+      background: #000;
       opacity: 0.35;
       z-index: 2;
       pointer-events: none;
@@ -45,6 +41,10 @@
   }
 
   .detail {
+    [data-color] {
+      color: var(--text-color);
+    }
+
     &_container {
       position: relative;
       height: 100vh;
@@ -55,6 +55,7 @@
       position: relative;
       height: calc(var(--app-height) - var(--h-control));
       overflow: hidden;
+      // overflow-y: auto;
 
       display: flex;
       flex-direction: column;
@@ -105,7 +106,7 @@
       }
 
       @include maxW {
-        padding-bottom: 25px;
+        padding-bottom: 140px;
 
         &_navigation {
           grid-template-columns: repeat(1, 1fr);
@@ -130,6 +131,12 @@
           }
         }
       }
+    }
+
+    &_inner,
+    &_footer {
+      position: relative;
+      z-index: 3;
     }
 
     &_control {
@@ -210,6 +217,9 @@
         bottom: 45px;
         right: 5px;
         z-index: 3;
+
+        opacity: 0;
+        pointer-events: none;
       }
 
       @include maxW {
@@ -228,7 +238,7 @@
         }
 
         &_back {
-          bottom: 25px;
+          bottom: 20px;
 
           svg {
             width: 10px;
