@@ -266,6 +266,17 @@ const initPopup = () => {
 const initDetailPage = () => {
   const detailSection = document.querySelector("[data-section-detail]");
   if (!detailSection) return;
+  document.body.style.overflow = "hidden";
+
+  gsap.to(detailSection, {
+    opacity: 1,
+    duration: 2,
+    delay: 2,
+    ease: "power2.out",
+    onComplete: () => {
+      document.body.style.overflow = "";
+    },
+  });
 };
 
 // ===== menu =====
@@ -372,7 +383,7 @@ const handleScrollTrigger = () => {
         pointerEvents: "auto",
         duration: 0.6,
         ease: "power2.out",
-        delay: 0.3,
+        delay: 0.2,
       },
       0,
     );
@@ -410,7 +421,7 @@ const handleScrollTrigger = () => {
         pointerEvents: "auto",
         duration: 0.6,
         ease: "power2.out",
-        delay: 0.3,
+        delay: 0.2,
       },
       0,
     );

@@ -41,6 +41,8 @@
   }
 
   .detail {
+    opacity: 0;
+
     [data-color] {
       color: var(--text-color);
     }
@@ -241,7 +243,7 @@
 
       &_back {
         position: absolute;
-        bottom: 45px;
+        bottom: 35px;
         right: 5px;
         z-index: 3;
 
