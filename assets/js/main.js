@@ -223,21 +223,31 @@ const toggleMenu = () => {
   menu.classList.toggle("--show", !isOpen);
   menuTogglers[0].innerText = isOpen ? "Menu" : "Close";
 
+  if (isOpen) {
+    lenis.start();
+    document.body.style.overflow = '';
+  } else {
+    lenis.stop();
+    document.body.style.overflow = 'hidden';
+  }
+
   if (!menuColors) return;
   menuColors.forEach((item) => item.classList.toggle("--color", !isOpen));
 };
 menuTogglers?.forEach((btn) => btn.addEventListener("click", toggleMenu));
 
 // ===== handle video =====
-const [video, videoOverlay, soundOnBtn, soundOffBtn] = [
-  document.querySelector("[data-video]"),
+const [videos, videoOverlay, soundOnBtn, soundOffBtn] = [
+  document.querySelectorAll("[data-video]"),
   document.querySelector("[data-video-overlay]"),
   document.querySelector("[data-sound-on]"),
   document.querySelector("[data-sound-off]"),
 ];
 
 const toggleSound = (isMuted) => {
-  video.muted = !isMuted;
+  videos.forEach((item) => {
+    item.muted = !isMuted;
+  })
   soundOnBtn.classList.toggle("--active", isMuted);
   soundOffBtn.classList.toggle("--active", !isMuted);
 };
@@ -280,7 +290,7 @@ const handleScrollTrigger = () => {
   const triggerTop = document.querySelector("[data-offsettop]");
   const triggerBottom = document.querySelector("[data-offsetbottom]");
 
-  if (!video || !videoOverlay || !triggerTop || !triggerBottom) return;
+  if (!videos || !videoOverlay || !triggerTop || !triggerBottom) return;
   gsap
     .timeline({
       scrollTrigger: {
@@ -289,10 +299,10 @@ const handleScrollTrigger = () => {
         start: "bottom top+=10%",
         end: "bottom top+=10%",
         toggleActions: "play none none reverse",
-        markers: true,
+        markers: false,
       },
     })
-    .to(video, { opacity: 0.15, duration: 0.5 }, 0)
+    .to(videos, { opacity: 0.15, duration: 0.5 }, 0)
     .to(videoOverlay, { backgroundColor: "#fff", duration: 0.5 }, 0)
     .to(":root", { "--text-color": "#000", duration: 0.5 }, 0)
     .to("[data-control-line]", { opacity: 0, duration: 0.5 }, 0)
@@ -310,10 +320,10 @@ const handleScrollTrigger = () => {
         start: "bottom top+=10%",
         end: "bottom top+=10%",
         toggleActions: "play none none reverse",
-        markers: true,
+        markers: false,
       },
     })
-    .to(video, { opacity: 1, duration: 0.5 }, 0)
+    .to(videos, { opacity: 1, duration: 0.5 }, 0)
     .to(videoOverlay, { backgroundColor: "#000", duration: 0.5 }, 0)
     .to(":root", { "--text-color": "#fff", duration: 0.5 }, 0)
     .to(

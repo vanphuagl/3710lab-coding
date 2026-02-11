@@ -222,9 +222,11 @@
         <!-- bg// -->
         <section class="bg">
             <div class="bg_container">
-                <video class="bg_video" data-video autoplay muted loop playsinline>
-                    <source src="/assets/videos/yuriage01_yoko_pc.webm" type="video/webm" media="(min-width: 1025px)">
-                    <source src="/assets/videos/yurage02_tate_sp.webm" type="video/webm" media="(max-width: 1024px)">
+                <video class="bg_video" pc-only data-video autoplay muted loop playsinline>
+                    <source src="/assets/videos/yuriage01_yoko_pc.webm" type="video/webm" >
+                </video>
+                <video class="bg_video" sp-only data-video autoplay muted loop playsinline>
+                    <source src="/assets/videos/yurage02_tate_sp.webm" type="video/webm" >
                 </video>
             </div>
             <div class="bg_overlay" data-video-overlay></div>

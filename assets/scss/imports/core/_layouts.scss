@@ -36,10 +36,6 @@ body {
   position: relative;
   overflow-x: hidden;
 
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
   &::after {
     content: "";
     position: fixed;
@@ -58,10 +54,6 @@ body {
     opacity: 1;
     pointer-events: auto;
   }
-}
-
-main {
-  flex: 1;
 }
 
 h1,
