@@ -15,7 +15,8 @@
 }
 
 html {
-  font-size: calc(62.5% * var(--font-scale));
+  // font-size: calc(62.5% * var(--font-scale));
+  font-size: 62.5%;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
