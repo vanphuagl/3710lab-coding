@@ -38,16 +38,9 @@ lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
-// ===== UTILTIES =====
-const stopScroll = () => {
-  lenis.stop();
-  document.body.style.overflow = "hidden";
-};
-
-const startScroll = () => {
-  lenis.start();
-  document.body.style.overflow = "";
-};
+// ===== UTILITIES =====
+const stopScroll = () => { lenis.stop(); document.body.style.overflow = "hidden"; };
+const startScroll = () => { lenis.start(); document.body.style.overflow = ""; };
 
 // ===== INIT APP HEIGHT =====
 const initAppHeight = () => {
@@ -123,8 +116,10 @@ const initLoading = () => {
 
 // ===== INIT POPUP =====
 const initPopup = () => {
-  const popups = document.querySelectorAll("[data-popup]");
-  const togglers = document.querySelectorAll("[data-popup-toggler]");
+  const [popups, togglers] = [
+    document.querySelectorAll("[data-popup]"),
+    document.querySelectorAll("[data-popup-toggler]"),
+  ]
   if (!popups.length || !togglers.length) return;
 
   const openPopup = (popup) => {
@@ -203,9 +198,11 @@ const initDetailPage = () => {
 
 // ===== INIT MENU =====
 const initMenu = () => {
-  const menu = document.querySelector("[data-menu]");
-  const menuTogglers = document.querySelectorAll("[data-menu-toggler]");
-  const menuColors = document.querySelectorAll("[data-menu-color]");
+  const [menu, menuTogglers, menuColors] = [
+    document.querySelector("[data-menu]"),
+    document.querySelectorAll("[data-menu-toggler]"),
+    document.querySelectorAll("[data-menu-color]")
+  ]
   if (!menu || !menuTogglers.length) return;
 
   const toggleMenu = () => {
@@ -222,8 +219,10 @@ const initMenu = () => {
 
 // ===== HANDLE BACKGROUND VIDEO =====
 const handleBackgroundVideo = () => {
-  const video = document.querySelector("[data-video]");
-  const source = document.getElementById("video-source");
+  const [video, source] = [
+    document.querySelector("[data-video]"),
+    document.getElementById("video-source")
+  ]
   if (!video || !source) return;
 
   const updateVideo = () => {
@@ -255,9 +254,11 @@ const waitForVideos = () => {
 
 // ===== HANDLE VIDEO SOUND =====
 const handleSoundVideo = () => {
-  const video = document.querySelector("[data-video]");
-  const soundOnBtn = document.querySelector("[data-sound-on]");
-  const soundOffBtn = document.querySelector("[data-sound-off]");
+  const [video, soundOnBtn, soundOffBtn] = [
+    document.querySelector("[data-video]"),
+    document.querySelector("[data-sound-on]"),
+    document.querySelector("[data-sound-off]")
+  ]
   if (!video || !soundOnBtn || !soundOffBtn) return;
 
   const toggleSound = (isMuted) => {
@@ -272,8 +273,10 @@ const handleSoundVideo = () => {
 
 // ===== HANDLE SIZE TEXT =====
 const handleSizeText = () => {
-  const sizeDefaultBtn = document.querySelector("[data-size-default]");
-  const sizeLargeBtn = document.querySelector("[data-size-large]");
+  const [sizeDefaultBtn, sizeLargeBtn] = [
+    document.querySelector("[data-size-default]"),
+    document.querySelector("[data-size-large]")
+  ]
   if (!sizeDefaultBtn || !sizeLargeBtn) return;
 
   const toggleSize = (isLarge) => {
@@ -307,14 +310,15 @@ const handleBackToTop = () => {
 
 // ===== INIT SCROLL TRIGGER =====
 const initScrollTrigger = () => {
-  const video = document.querySelector("[data-video]");
-  const videoOverlay = document.querySelector("[data-video-overlay]");
-  const triggerTop = document.querySelector("[data-offsettop]");
-  const triggerBottom = document.querySelector("[data-offsetbottom]");
-  const triggerBack = document.querySelector("[data-control-back]");
-  const triggerLine = document.querySelector("[data-control-line]");
-  const triggerSize = document.querySelector("[data-control-size]");
-
+  const [video, videoOverlay, triggerTop, triggerBottom, triggerBack, triggerLine, triggerSize] = [
+    document.querySelector("[data-video]"),
+    document.querySelector("[data-video-overlay]"),
+    document.querySelector("[data-offsettop]"),
+    document.querySelector("[data-offsetbottom]"),
+    document.querySelector("[data-control-back]"),
+    document.querySelector("[data-control-line]"),
+    document.querySelector("[data-control-size]"),
+  ]
   if (!video || !videoOverlay || !triggerTop || !triggerBottom) return;
 
   // top trigger
